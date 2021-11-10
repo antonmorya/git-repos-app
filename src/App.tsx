@@ -1,24 +1,14 @@
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  Redirect,
-} from "react-router-dom";
+import { Switch, Route, Link, useRouteMatch, Redirect } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import { SearchOutlined, StarOutlined } from "@ant-design/icons";
 import logo from "./logo.svg";
+import SearchPage from "./pages/Search";
+
+import "./App.css";
+import { ROUTES } from "./constants";
 
 const { Header, Content, Footer, Sider } = Layout;
-
-const ROUTES = {
-  repositories: "/repos",
-  oneRepo: "/repos/:id",
-  home: "/",
-  favourites: "/favourites",
-};
 
 const Repos = () => {
   let { path, url, isExact, params } = useRouteMatch();
@@ -49,11 +39,6 @@ function App() {
   const defaultSelectedKey =
     (isHomePage && "1") || (isFavouritesPage && "2") || "0";
 
-  console.debug({
-    isFavouritesPage,
-    isHomePage,
-  });
-
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider
@@ -61,7 +46,6 @@ function App() {
         collapsed={isCollapsed}
         onCollapse={() => setCollapsed((current: boolean) => !current)}
       >
-        {/* <div className="logo" /> */}
         <div
           style={{
             marginTop: 3,
@@ -84,11 +68,11 @@ function App() {
           mode="inline"
         >
           <Menu.Item key="1" icon={<SearchOutlined />}>
-            <Link to="/">Search</Link>
+            <Link to={ROUTES.home}>Search</Link>
           </Menu.Item>
 
           <Menu.Item key="2" icon={<StarOutlined />}>
-            <Link to="/favourites">Favourites</Link>
+            <Link to={ROUTES.favourites}>Favourites</Link>
           </Menu.Item>
         </Menu>
       </Sider>
@@ -102,11 +86,9 @@ function App() {
             style={{ padding: 24, minHeight: 360 }}
           >
             <Switch>
-              <Route exact path={ROUTES.home}>
-                <h1>Repos</h1>
-              </Route>
+              <Route exact path={ROUTES.home} component={SearchPage} />
 
-              <Route path="/repos" component={Repos} />
+              <Route path={ROUTES.repositories} component={Repos} />
 
               <Route path={ROUTES.favourites}>
                 <h2>favourites</h2>
