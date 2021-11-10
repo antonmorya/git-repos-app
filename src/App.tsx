@@ -4,6 +4,7 @@ import { Layout, Menu } from "antd";
 import { SearchOutlined, StarOutlined } from "@ant-design/icons";
 import logo from "./logo.svg";
 import SearchPage from "./pages/Search";
+import FavouritesPage from "./pages/Favourites";
 
 import "./App.css";
 import { ROUTES } from "./constants";
@@ -51,15 +52,7 @@ function App() {
             marginTop: 3,
           }}
         >
-          <img
-            src={logo}
-            alt="Logo"
-            style={
-              {
-                // border: "1px dashed red",
-              }
-            }
-          />
+          <img src={logo} alt="Logo" />
         </div>
 
         <Menu
@@ -90,9 +83,7 @@ function App() {
 
               <Route path={ROUTES.repositories} component={Repos} />
 
-              <Route path={ROUTES.favourites}>
-                <h2>favourites</h2>
-              </Route>
+              <Route path={ROUTES.favourites} component={FavouritesPage} />
 
               <Route path="*">
                 <h1>No such route</h1>

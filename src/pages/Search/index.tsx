@@ -94,12 +94,13 @@ const SearchPage = () => {
         key="open_issues_count"
       />
       <Column
+        align="center"
         title="Favourite"
         dataIndex="favourite"
         key=""
         render={(
           value,
-          { full_name, id, language, stargazers_count }: TRepoItem
+          { name, id, language, stargazers_count }: TRepoItem
         ) => (
           <button
             style={{
@@ -114,7 +115,7 @@ const SearchPage = () => {
 
               window.setTimeout(() => {
                 Preserver.toggleFavourite(id, {
-                  full_name,
+                  name,
                   id,
                   language,
                   stargazers_count,
@@ -136,6 +137,7 @@ const SearchPage = () => {
         )}
       />
       <Column
+        align="center"
         title="More"
         dataIndex="more"
         key=""

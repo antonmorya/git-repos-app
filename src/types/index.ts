@@ -17,7 +17,7 @@ export type TOwner = {
 
 export type TRepoItem = {
   id: number;
-  full_name: string;
+  name: string;
   language: string;
   open_issues_count: number;
   owner: TOwner;
@@ -27,7 +27,7 @@ export type TRepoItem = {
 
 export type TStoredRepoItem = {
   id: number;
-  full_name: string;
+  name: string;
   language: string;
   stargazers_count: number;
 };
