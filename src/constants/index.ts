@@ -38,7 +38,41 @@ export const LANGUAGES = [
 
 export const ROUTES = {
   repositories: "/repos",
-  oneRepo: "/repos/:id",
+  oneRepo: "/repos/:owner/:repo",
   home: "/",
   favourites: "/favourites",
+};
+
+export const ORDER = [
+  "owner",
+  "description",
+  "language",
+  "open_issues_count",
+  "private",
+  "stargazers_count",
+  "archived",
+  "disabled",
+  "homepage",
+  "license",
+  "topics",
+  "visibility",
+  "watchers_count",
+];
+
+export const HUMAN_READABLE_KEYS = {
+  owner: "Owner",
+  description: "Description",
+  language: "Language",
+  open_issues_count: "Open issues count",
+  private: "Private",
+  stargazers_count: "Stargazers count",
+  archived: "Archived",
+  created_at: "Created at",
+  disabled: "Disabled",
+  homepage: "Homepage",
+  license: "License",
+  topics: "Topics",
+  updated_at: "Updated at",
+  visibility: "Visibility",
+  watchers_count: "Watchers count",
 };

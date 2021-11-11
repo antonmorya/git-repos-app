@@ -5,6 +5,7 @@ import { SearchOutlined, StarOutlined } from "@ant-design/icons";
 import logo from "./logo.svg";
 import SearchPage from "./pages/Search";
 import FavouritesPage from "./pages/Favourites";
+import RepoPage from "./pages/Repo";
 
 import "./App.css";
 import { ROUTES } from "./constants";
@@ -21,9 +22,7 @@ const Repos = () => {
         <Redirect to={ROUTES.home} />
       </Route>
 
-      <Route path={ROUTES.oneRepo}>
-        <h1>some repo</h1>
-      </Route>
+      <Route path={ROUTES.oneRepo} component={RepoPage} />
     </Switch>
   );
 };

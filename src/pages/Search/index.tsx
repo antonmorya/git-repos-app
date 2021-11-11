@@ -7,7 +7,7 @@ import {
   StarOutlined,
   EllipsisOutlined,
 } from "@ant-design/icons";
-import { LoadingState, ParamOrder, TOwner, TRepoItem } from "../../types";
+import { LoadingState, ParamOrder, TUser, TRepoItem } from "../../types";
 import { LANGUAGES, ROUTES } from "../../constants";
 import useSearch from "./useSearch";
 import Preserver from "../../utils/preserver";
@@ -83,7 +83,7 @@ const SearchPage = () => {
           title="Owner"
           dataIndex="owner"
           key="owner"
-          render={(owner: TOwner) => {
+          render={(owner: TUser) => {
             return (
               <>
                 <Avatar
@@ -185,7 +185,7 @@ const SearchPage = () => {
           key=""
           render={(value, record: TRepoItem) => (
             <Link
-              to={`${ROUTES.repositories}/${record.id}`}
+              to={`${ROUTES.repositories}/${record.full_name}`}
               style={{
                 margin: 0,
                 padding: 0,

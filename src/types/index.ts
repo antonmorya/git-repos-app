@@ -9,20 +9,50 @@ export enum ParamOrder {
   desc = "desc",
 }
 
-export type TOwner = {
+export type TUser = {
   avatar_url: string;
   id: number;
   login: string;
 };
 
+export type TLicense = {
+  name: string;
+  url: string;
+};
+
 export type TRepoItem = {
   id: number;
   name: string;
+  full_name: string;
   language: string;
   open_issues_count: number;
-  owner: TOwner;
+  owner: TUser;
   private: boolean;
   stargazers_count: number;
+};
+
+export type RepoItemValueType =
+  | string
+  | boolean
+  | number
+  | string[]
+  | TLicense
+  | TUser;
+
+export type ExtendedRepoItem = TRepoItem & {
+  [key: string]: RepoItemValueType;
+  archived: boolean;
+  created_at: string;
+  description: string;
+  disabled: boolean;
+  homepage: string;
+  language: string;
+  license: TLicense;
+  open_issues_count: number;
+  topics: string[];
+  updated_at: string;
+  visibility: string;
+  watchers_count: number;
 };
 
 export type TStoredRepoItem = {
@@ -45,4 +75,14 @@ export type TResponceShape<T> = {
   items: Array<T>;
 };
 
-export type TRequest = (url: string) => Promise<TResponceShape<TRepoItem>>;
+export type TRequest = (
+  url: string
+) => Promise<TResponceShape<TRepoItem> | ExtendedRepoItem | TCommitItem[]>;
+
+export type TCommitItem = {
+  sha: string;
+  commit: {
+    message: string;
+  };
+  author: TUser;
+};

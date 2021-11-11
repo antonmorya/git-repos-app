@@ -8,24 +8,6 @@ import { Link } from "react-router-dom";
 import Column from "rc-table/lib/sugar/Column";
 import { EllipsisOutlined } from "@ant-design/icons";
 
-const columnsSchema = [
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-  },
-  {
-    title: "Language",
-    dataIndex: "language",
-    key: "language",
-  },
-  {
-    title: "Stars",
-    dataIndex: "stargazers_count",
-    key: "stargazers_count",
-  },
-];
-
 const FavouritesPage = () => {
   const [data, setData] = useState<TStoredRepoItem[]>([]);
 
@@ -51,7 +33,7 @@ const FavouritesPage = () => {
         key=""
         render={(value, record: TRepoItem) => (
           <Link
-            to={`${ROUTES.repositories}/${record.id}`}
+            to={`${ROUTES.repositories}/${record.full_name}`}
             style={{
               margin: 0,
               padding: 0,
