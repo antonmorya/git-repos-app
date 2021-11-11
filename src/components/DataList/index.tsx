@@ -34,8 +34,8 @@ const renderListData = (data: RepoItemValueType) => {
 
     case "object":
       return (
-        (isLisense(data) && data.name) ||
-        (isOwner(data) && (
+        (data && isLisense(data) && data.name) ||
+        (data && isOwner(data) && (
           <>
             <Avatar
               size={25}
@@ -46,7 +46,7 @@ const renderListData = (data: RepoItemValueType) => {
             {data.login}
           </>
         )) ||
-        "its here"
+        ""
       );
 
     default:

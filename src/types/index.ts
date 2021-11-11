@@ -60,6 +60,7 @@ export type TStoredRepoItem = {
   name: string;
   language: string;
   stargazers_count: number;
+  full_name: string;
 };
 
 export type Filters = {

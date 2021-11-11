@@ -30,7 +30,7 @@ const FavouritesPage = () => {
         align="center"
         title="More"
         dataIndex="more"
-        key=""
+        key="id"
         render={(value, record: TRepoItem) => (
           <Link
             to={`${ROUTES.repositories}/${record.full_name}`}

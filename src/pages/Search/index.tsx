@@ -141,7 +141,7 @@ const SearchPage = () => {
           key=""
           render={(
             value,
-            { name, id, language, stargazers_count }: TRepoItem
+            { name, id, language, stargazers_count, full_name }: TRepoItem
           ) => (
             <button
               style={{
@@ -160,6 +160,7 @@ const SearchPage = () => {
                     id,
                     language,
                     stargazers_count,
+                    full_name,
                   });
                   setLoadingState(LoadingState.fulfilled);
                 }, 250);
