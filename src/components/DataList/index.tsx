@@ -1,7 +1,7 @@
 import React from "react";
 import { Avatar, List, Tag, Typography } from "antd";
 import {
-  ExtendedRepoItem,
+  ExtendedRepositoryItem,
   RepoItemValueType,
   TLicense,
   TUser,
@@ -60,7 +60,7 @@ const DataList = ({
   humanKeys,
 }: {
   order: string[];
-  data: ExtendedRepoItem | Record<string, RepoItemValueType>;
+  data: ExtendedRepositoryItem | Record<string, RepoItemValueType>;
   humanKeys: Record<string, string>;
 }) => (
   <>

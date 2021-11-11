@@ -7,7 +7,7 @@ import {
   StarOutlined,
   EllipsisOutlined,
 } from "@ant-design/icons";
-import { LoadingState, ParamOrder, TUser, TRepoItem } from "../../types";
+import { LoadingState, ParamOrder, TUser, RepositoryItem } from "../../types";
 import { LANGUAGES, ROUTES } from "../../constants";
 import useSearch from "./useSearch";
 import Preserver from "../../utils/preserver";
@@ -48,13 +48,13 @@ const SearchPage = () => {
         }}
       />
 
-      <Table<TRepoItem>
+      <Table<RepositoryItem>
         dataSource={data}
         onChange={(
           pagination: TablePaginationConfig,
           innerFilters: Record<string, FilterValue | null>,
-          sorter: SorterResult<TRepoItem> | SorterResult<TRepoItem>[],
-          extra: TableCurrentDataSource<TRepoItem>
+          sorter: SorterResult<RepositoryItem> | SorterResult<RepositoryItem>[],
+          extra: TableCurrentDataSource<RepositoryItem>
         ) => {
           const { current, pageSize } = pagination;
           const { action } = extra;
@@ -108,9 +108,10 @@ const SearchPage = () => {
           title="Language"
           dataIndex="language"
           key="language"
-          onFilter={(value: string | number | boolean, record: TRepoItem) =>
-            (record["language"] || "") === value
-          }
+          onFilter={(
+            value: string | number | boolean,
+            record: RepositoryItem
+          ) => (record["language"] || "") === value}
           filters={[
             {
               text: "Human - readable language",
@@ -141,7 +142,7 @@ const SearchPage = () => {
           key=""
           render={(
             value,
-            { name, id, language, stargazers_count, full_name }: TRepoItem
+            { name, id, language, stargazers_count, full_name }: RepositoryItem
           ) => (
             <button
               style={{
@@ -184,7 +185,7 @@ const SearchPage = () => {
           dataIndex="more"
           width="1%"
           key=""
-          render={(value, record: TRepoItem) => (
+          render={(value, record: RepositoryItem) => (
             <Link
               to={`${ROUTES.repositories}/${record.full_name}`}
               style={{

@@ -3,8 +3,8 @@ import {
   Filters,
   LoadingState,
   ParamOrder,
-  TRepoItem,
-  TResponceShape,
+  RepositoryItem,
+  RepositoryItemResponce,
 } from "../../types";
 import cachedRequest from "../../utils/request";
 import Preserver from "../../utils/preserver";
@@ -38,7 +38,7 @@ const useSearch = () => {
         `https://api.github.com/search/repositories?sort=stars&${objectToQueryParams(
           params
         )}`
-      )) as TResponceShape<TRepoItem>;
+      )) as RepositoryItemResponce<RepositoryItem>;
 
       setData(items);
       setTotalCount(total_count);

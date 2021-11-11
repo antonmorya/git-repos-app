@@ -1,4 +1,4 @@
-import { Filters, TStoredRepoItem } from "../types";
+import { Filters, StoredRepositoryItem } from "../types";
 
 enum LocalStorageVars {
   filters = "git-repos-app_filters",
@@ -7,7 +7,7 @@ enum LocalStorageVars {
 
 class Preserver {
   private filters: Partial<Filters> = {};
-  private favourites: Record<number, TStoredRepoItem> = [];
+  private favourites: Record<number, StoredRepositoryItem> = [];
 
   public constructor() {
     const localStorageFilters = localStorage.getItem(LocalStorageVars.filters);
@@ -37,7 +37,7 @@ class Preserver {
     return this.filters;
   }
 
-  public toggleFavourite(id: number, info: TStoredRepoItem) {
+  public toggleFavourite(id: number, info: StoredRepositoryItem) {
     if (this.favourites[id]) {
       delete this.favourites[id];
     } else {
@@ -53,7 +53,7 @@ class Preserver {
     );
   }
 
-  public getFavourites(): Record<number, TStoredRepoItem> {
+  public getFavourites(): Record<number, StoredRepositoryItem> {
     return this.favourites;
   }
 

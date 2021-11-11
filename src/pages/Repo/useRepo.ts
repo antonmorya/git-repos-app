@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import {
-  ExtendedRepoItem,
+  ExtendedRepositoryItem,
   LoadingState,
   RepoItemValueType,
-  TCommitItem,
+  PRItem,
 } from "../../types";
 import { request } from "../../utils/request";
 
 const useRepo = ({ owner, repo }: { owner: string; repo: string }) => {
-  const [commits, setCommits] = useState<TCommitItem[]>([]);
+  const [prList, setPrList] = useState<PRItem[]>([]);
   const [dataLoadingState, setDataLoadingState] = useState({});
   const [commitsLoadingState, setCommitsLoadingState] = useState({});
   const [data, setData] = useState<
-    ExtendedRepoItem | Record<string, RepoItemValueType>
+    ExtendedRepositoryItem | Record<string, RepoItemValueType>
   >({});
 
   const getData = async () => {
@@ -21,7 +21,7 @@ const useRepo = ({ owner, repo }: { owner: string; repo: string }) => {
     try {
       const repoData = (await request(
         `https://api.github.com/repos/${owner}/${repo}`
-      )) as ExtendedRepoItem;
+      )) as ExtendedRepositoryItem;
 
       setData(repoData);
 
@@ -38,18 +38,18 @@ const useRepo = ({ owner, repo }: { owner: string; repo: string }) => {
     setCommitsLoadingState(LoadingState.pending);
 
     try {
-      const commitsItems = (await request(
-        `https://api.github.com/repos/${owner}/${repo}/commits`
-      )) as TCommitItem[];
+      const prItems = (await request(
+        `https://api.github.com/repos/${owner}/${repo}/pulls?per_page=10`
+      )) as PRItem[];
 
-      setCommits(commitsItems);
+      setPrList(prItems);
 
       setCommitsLoadingState(LoadingState.fulfilled);
     } catch (error) {
       console.error("Error getting repos: ", error);
       setCommitsLoadingState(LoadingState.error);
 
-      setCommits([]);
+      setPrList([]);
     }
   };
 
@@ -62,7 +62,7 @@ const useRepo = ({ owner, repo }: { owner: string; repo: string }) => {
     isLoading:
       dataLoadingState !== LoadingState.fulfilled &&
       commitsLoadingState !== LoadingState.fulfilled,
-    commits,
+    prList,
     data,
   };
 };

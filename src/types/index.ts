@@ -1,3 +1,4 @@
+// common
 export enum LoadingState {
   pending,
   fulfilled,
@@ -20,7 +21,7 @@ export type TLicense = {
   url: string;
 };
 
-export type TRepoItem = {
+export type RepositoryItem = {
   id: number;
   name: string;
   full_name: string;
@@ -39,7 +40,7 @@ export type RepoItemValueType =
   | TLicense
   | TUser;
 
-export type ExtendedRepoItem = TRepoItem & {
+export type ExtendedRepositoryItem = RepositoryItem & {
   [key: string]: RepoItemValueType;
   archived: boolean;
   created_at: string;
@@ -55,7 +56,7 @@ export type ExtendedRepoItem = TRepoItem & {
   watchers_count: number;
 };
 
-export type TStoredRepoItem = {
+export type StoredRepositoryItem = {
   id: number;
   name: string;
   language: string;
@@ -70,20 +71,16 @@ export type Filters = {
   q: string;
 };
 
-export type TResponceShape<T> = {
+export type RepositoryItemResponce<T> = {
   total_count: number;
   incomplete_results: boolean;
   items: Array<T>;
 };
 
-export type TRequest = (
-  url: string
-) => Promise<TResponceShape<TRepoItem> | ExtendedRepoItem | TCommitItem[]>;
-
-export type TCommitItem = {
-  sha: string;
-  commit: {
-    message: string;
-  };
-  author: TUser;
+export type PRItem = {
+  id: number;
+  title: string;
+  user: TUser;
 };
+
+export type TRequest = (url: string) => Promise<unknown>;

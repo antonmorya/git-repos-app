@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { Layout, Spin } from "antd";
 import { RouteComponentProps } from "react-router-dom";
 import { List, Typography } from "antd";
-import CommitsList from "../../components/CommitsList";
+import CommitsList from "../../components/PullsList";
 import { HUMAN_READABLE_KEYS, ORDER } from "../../constants";
 import DataList from "../../components/DataList";
 import useRepo from "./useRepo";
@@ -15,7 +15,7 @@ const RepoPage = ({
 }: RouteComponentProps<{ owner: string; repo: string }>) => {
   const { owner, repo } = match?.params;
 
-  const { isLoading, commits, data } = useRepo({ owner, repo });
+  const { isLoading, prList, data } = useRepo({ owner, repo });
 
   const memoizedDataList = useMemo(
     () => (
@@ -24,9 +24,9 @@ const RepoPage = ({
     [data]
   );
 
-  const memoizedCommitsList = useMemo(
-    () => <CommitsList commits={commits} />,
-    [commits]
+  const memoizedPullsList = useMemo(
+    () => <CommitsList items={prList} />,
+    [prList]
   );
 
   return isLoading ? (
@@ -53,7 +53,9 @@ const RepoPage = ({
             backgroundColor: "transparent",
           }}
         >
-          <List size="small">{memoizedCommitsList}</List>
+          <List size="small" header={<h2>Pull requests (last 10)</h2>}>
+            {memoizedPullsList}
+          </List>
         </Sider>
       </Layout>
     </>

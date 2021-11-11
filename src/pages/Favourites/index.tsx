@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
-import { TRepoItem, TStoredRepoItem } from "../../types";
+import { RepositoryItem, StoredRepositoryItem } from "../../types";
 import Preserver from "../../utils/preserver";
 import { isEmpty } from "../../utils";
 import { ROUTES } from "../../constants";
@@ -9,7 +9,7 @@ import Column from "rc-table/lib/sugar/Column";
 import { EllipsisOutlined } from "@ant-design/icons";
 
 const FavouritesPage = () => {
-  const [data, setData] = useState<TStoredRepoItem[]>([]);
+  const [data, setData] = useState<StoredRepositoryItem[]>([]);
 
   useEffect(() => {
     const localStorageFavourites = Preserver.getFavourites();
@@ -22,7 +22,7 @@ const FavouritesPage = () => {
   }, []);
 
   return (
-    <Table<TStoredRepoItem> dataSource={data}>
+    <Table<StoredRepositoryItem> dataSource={data}>
       <Column title="Name" dataIndex="name" key="name" />
       <Column title="Language" dataIndex="language" key="language" />
       <Column
@@ -31,7 +31,7 @@ const FavouritesPage = () => {
         title="More"
         dataIndex="more"
         key="id"
-        render={(value, record: TRepoItem) => (
+        render={(value, record: RepositoryItem) => (
           <Link
             to={`${ROUTES.repositories}/${record.full_name}`}
             style={{
