@@ -36,6 +36,7 @@ export type Filters = {
   order: ParamOrder;
   page: number;
   per_page: number;
+  q: string;
 };
 
 export type TResponceShape<T> = {

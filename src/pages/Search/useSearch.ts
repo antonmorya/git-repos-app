@@ -15,6 +15,7 @@ const DEFAULT_FILTERS = {
   order: ParamOrder.desc,
   page: 1,
   per_page: 10,
+  q: "stars:>1",
 };
 
 const useSearch = () => {
@@ -34,15 +35,13 @@ const useSearch = () => {
 
     try {
       const { items, total_count } = (await cachedRequest(
-        `https://api.github.com/search/repositories?q=stars:>1&${objectToQueryParams(
+        `https://api.github.com/search/repositories?sort=stars&${objectToQueryParams(
           params
         )}`
       )) as TResponceShape<TRepoItem>;
 
       setData(items);
       setTotalCount(total_count);
-
-      console.debug(items.map((item) => item.language));
 
       setLoadingState(LoadingState.fulfilled);
     } catch (error) {
